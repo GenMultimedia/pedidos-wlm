@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <style>
+        /* Estilos CSS integrados */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        nav {
+            background-color: #f4f4f4;
+            padding: 0.5rem;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .item {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="time"],
+        textarea {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#imagenes">Gestionar Imágenes</a></li>
+            <li><a href="#precios">Gestionar Precios</a></li>
+            <li><a href="#textos">Gestionar Textos</a></li>
+            <li><a href="#horario">Horario de Atención</a></li>
+            <li><a href="#stock">Gestionar Stock</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- Sección para gestionar imágenes -->
+        <section id="imagenes">
+            <h2>Gestionar Imágenes</h2>
+            <div class="item">
+                <label for="logo-src">Logo:</label>
+                <input type="text" id="logo-src" placeholder="URL de la imagen">
+            </div>
+            <div class="item">
+                <label for="banner-src">Banner:</label>
+                <input type="text" id="banner-src" placeholder="URL de la imagen">
+            </div>
+            <!-- Puedes agregar más imágenes aquí -->
+            <button class="guardar" data-seccion="imagenes">Guardar cambios</button>
+        </section>
+
+        <!-- Sección para gestionar precios -->
+        <section id="precios">
+            <h2>Gestionar Precios</h2>
+            <div class="item">
+                <label for="burger1-precio">Precio Hamburguesa 1:</label>
+                <input type="number" id="burger1-precio" step="0.01" min="0">
+            </div>
+            <div class="item">
+                <label for="pizza1-precio">Precio Pizza 1:</label>
+                <input type="number" id="pizza1-precio" step="0.01" min="0">
+            </div>
+            <!-- Puedes agregar más productos aquí -->
+            <button class="guardar" data-seccion="precios">Guardar cambios</button>
+        </section>
+
+        <!-- Sección para gestionar textos -->
+        <section id="textos">
+            <h2>Gestionar Textos</h2>
+            <div class="item">
+                <label for="titulo-texto">Título principal:</label>
+                <input type="text" id="titulo-texto">
+            </div>
+            <div class="item">
+                <label for="subtitulo-texto">Subtítulo:</label>
+                <input type="text" id="subtitulo-texto">
+            </div>
+            <!-- Puedes agregar más textos aquí -->
+            <button class="guardar" data-seccion="textos">Guardar cambios</button>
+        </section>
+
+        <!-- Nueva sección para gestionar horario de atención -->
+        <section id="horario">
+            <h2>Horario de Atención</h2>
+            <div class="item">
+                <label for="horario-apertura">Hora de apertura:</label>
+                <input type="time" id="horario-apertura">
+            </div>
+            <div class="item">
+                <label for="horario-cierre">Hora de cierre:</label>
+                <input type="time" id="horario-cierre">
+            </div>
+            <button class="guardar" data-seccion="horario">Guardar cambios</button>
+        </section>
+
+        <!-- Nueva sección para gestionar stock -->
+        <section id="stock">
+            <h2>Gestionar Stock</h2>
+            <div class="item">
+                <label for="burger1-stock">Stock Hamburguesa 1:</label>
+                <input type="number" id="burger1-stock" min="0">
+            </div>
+            <div class="item">
+                <label for="pizza1-stock">Stock Pizza 1:</label>
+                <input type="number" id="pizza1-stock" min="0">
+            </div>
+            <!-- Puedes agregar más productos aquí -->
+            <button class="guardar" data-seccion="stock">Guardar cambios</button>
+        </section>
+    </main>
+
+    <script>
+        // JavaScript integrado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cargar datos existentes
+            cargarDatos();
+
+            // Agregar eventos a los botones de guardar
+            document.querySelectorAll('.guardar').forEach(btn => {
+                btn.addEventListener('click', guardarCambios);
+            });
+        });
+
+        function cargarDatos() {
+            // Aquí deberías cargar los datos existentes desde tu base de datos o API
+            // Por ahora, usaremos datos de ejemplo
+            const datos = {
+                imagenes: [
+                    { id: 'logo', src: './img/logo.png' },
+                    { id: 'banner', src: './img/burguer.png' }
+                ],
+                precios: [
+                    { id: 'burger1', precio: 15.99 },
+                    { id: 'pizza1', precio: 18.99 }
+                ],
+                textos: [
+                    { id: 'titulo', texto: 'Escolha sua comida favorita' },
+                    { id: 'subtitulo', texto: 'Aproveite nosso cardápio!' }
+                ],
+                horario: {
+                    apertura: '09:00',
+                    cierre: '22:00'
+                },
+                stock: [
+                    { id: 'burger1', cantidad: 50 },
+                    { id: 'pizza1', cantidad: 30 }
+                ]
+            };
+
+            // Rellenar los campos del formulario con los datos cargados
+            datos.imagenes.forEach(img => {
+                document.getElementById(`${img.id}-src`).value = img.src;
+            });
+
+            datos.precios.forEach(item => {
+                document.getElementById(`${item.id}-precio`).value = item.precio;
+            });
+
+            datos.textos.forEach(item => {
+                document.getElementById(`${item.id}-texto`).value = item.texto;
+            });
+
+            document.getElementById('horario-apertura').value = datos.horario.apertura;
+            document.getElementById('horario-cierre').value = datos.horario.cierre;
+
+            datos.stock.forEach(item => {
+                document.getElementById(`${item.id}-stock`).value = item.cantidad;
+            });
+        }
+
+        function guardarCambios(e) {
+            const seccion = e.target.dataset.seccion;
+            const items = document.querySelectorAll(`#${seccion} .item`);
+            const datos = [];
+
+            items.forEach(item => {
+                const id = item.querySelector('input').id.split('-')[0];
+                const valor = item.querySelector('input').value;
+                datos.push({ id, valor });
+            });
+
+            // Aquí deberías enviar los datos a tu servidor para guardarlos
+            console.log(`Guardando datos de ${seccion}:`, datos);
+            alert(`Cambios en ${seccion} guardados correctamente`);
+        }
+    </script>
+</body>
+</html>
